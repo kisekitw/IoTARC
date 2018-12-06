@@ -20,7 +20,7 @@ export class SocketService {
 			});
 
 			return (error) => {
-				console.error(error);
+				console.log(error);
 				this.socket.disconnect();
 			};
 		})

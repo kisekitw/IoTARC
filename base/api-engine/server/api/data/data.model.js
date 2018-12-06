@@ -1,4 +1,6 @@
-const mongoose = require('mongoose');
+'use strict';
+
+var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var DataSchema = new Schema({
@@ -20,20 +22,18 @@ var DataSchema = new Schema({
     }
 });
 
-DataSchema.pre('save', (next) => {
+DataSchema.pre('save', function (next) {
     var now = new Date();
     this.updatedAt = now;
-
     if (!this.createdAt) {
         this.createdAt = now;
     }
-
     next();
 });
 
-DataSchema.post('save', (doc) => {
-    console.log('Post Save Called', doc);
-    require('../data.socket.js').onSave(doc);
+DataSchema.post('save', function (doc) {
+    //console.log('Post Save Called', doc);
+    require('./data.socket.js').onSave(doc)
 });
 
 module.exports = mongoose.model('Data', DataSchema);

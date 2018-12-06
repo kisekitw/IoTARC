@@ -1,24 +1,47 @@
 <div class="container">
-    <br>
-    <div *ngIf="!device">
-        <h3 class="text-center">Loading!</h3>
-    </div>
-    <div class="row" *ngIf="device">
-        <div class="col-md-12">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        {{device.name}}
-                    </h3>
-                    <span class="pull-right btn-click">
-                        <i class="fa fa-chevron-circle-up"></i>
-                    </span>
-                </div>
-                <div class="clearfix"></div>
-                <div class="panel-body">
-                    <h3 class="text-center">Data & controls Will appear here!</h3>
-                </div>
-            </div>
+  <br>
+  <div *ngIf="!device">
+    <h3 class="text-center">Loading!</h3>
+  </div>
+  <div class="row" *ngIf="device">
+    <div class="col-md-12">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            {{device.name}}
+          </h3>
+          <span class="pull-right btn-click">
+            <i class="fa fa-chevron-circle-up"></i>
+          </span>
         </div>
+        <div class="clearfix"></div>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <tr>
+              <td>Toggle LED</td>
+              <td>
+                <ui-switch [(ngModel)]="toggleState" (change)="toggleChange($event)"></ui-switch>
+              </td>
+            </tr>
+            <tr *ngIf="lastRecord">
+              <td>Temperature</td>
+              <td>{{lastRecord.data.t}}</td>
+            </tr>
+            <tr *ngIf="lastRecord">
+              <td>Humidity</td>
+              <td>{{lastRecord.data.h}}</td>
+            </tr>
+            <tr *ngIf="lastRecord">
+              <td>Received At</td>
+              <td>{{lastRecord.createdAt | date: 'medium'}}</td>
+            </tr>
+          </table>
+          <div class="col-md-10 col-md-offset-1" *ngIf="lineChartData.length > 0">
+            <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+              [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

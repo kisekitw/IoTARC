@@ -29,6 +29,8 @@ import { SocketService } from './services/socket.service';
 import { DataService } from './services/data.service';
 
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { UiSwitchModule } from 'ngx-ui-switch';
+import { ChartsModule } from 'ng2-charts'; 
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -65,7 +67,9 @@ export function httpInterceptorService(backend: XHRBackend, options: RequestOpti
       prefix: 'web-app',
       storageType: 'localStorage'
     }),
-    SimpleNotificationsModule.forRoot()
+    SimpleNotificationsModule.forRoot(),
+    UiSwitchModule,
+    ChartsModule
   ],
   providers: [
     AuthService,
