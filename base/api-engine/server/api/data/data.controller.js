@@ -6,7 +6,7 @@ var Data = require('./data.model');
  * Get Data for a device
  */
 exports.index = function(req, res) {
-    var macAddress = req.params.deviceId;
+    var macAddress = req.params.macAddress;
     var limit = parseInt(req.params.limit) || 30;
     Data
     .find({
@@ -30,7 +30,7 @@ exports.create = function(req, res, next) {
         if (err) return res.status(500).send(err);
         res.json(_data);
         if(data.topic === 'led'){
-            console.log('aaaaaaaaaaaaaaaaaaaaa',data);
+            console.log('led publish===========>',data);
             require('../../mqtt/index.js').sendLEDData(data.data.l);// send led value
         }
     });

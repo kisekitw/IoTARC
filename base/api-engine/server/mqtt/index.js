@@ -22,14 +22,15 @@ client.on('connect', function () {
 
 client.on('message', function (topic, message) {
   // message is Buffer 
-  // console.log('Topic >> ', topic); 
-  // console.log('Message >> ', message.toString()); 
+   //console.log('Topic >> ', topic); 
+   //console.log('Message >> ', message.toString()); 
   if (topic === 'api-engine') {
     var macAddress = message.toString();
     console.log('Mac Address >> ', macAddress);
     client.publish('rpi', 'Got Mac Address: ' + macAddress);
   } else if (topic === 'dht22') {
     var data = JSON.parse(message.toString());
+    //console.log('topic dht22:====>', data);
     // create a new data record for the device 
     Data.create(data, function (err, data) {
       if (err) return console.error(err);

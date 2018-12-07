@@ -30,6 +30,7 @@ export class DataService {
 	get(id): Observable<Response> {
 		let headers = new Headers();
 		this.createAuthorizationHeader(headers);
+		console.log('url', Globals.BASE_API_URL + 'api/v1/data/' + id + '/' + this.dataLimit);
 		return this.http.get(Globals.BASE_API_URL + 'api/v1/data/' + id + '/' + this.dataLimit, {
 			headers: headers
 		});
