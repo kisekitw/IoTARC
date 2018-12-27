@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
+'use strict';
+
+var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var crypto = require('crypto');
 
 var DeviceSchema = new Schema({
     name: String,
@@ -17,16 +18,13 @@ var DeviceSchema = new Schema({
     }
 });
 
-DeviceSchema.pre('save', (next) => {
-        var now = new Date();
-
-        this.updatedAt = now;
-        
-        if (!this.createdAt) {
-            this.createdAt = now;
-        }
-
-        next();
-    });
+DeviceSchema.pre('save', function(next) {
+    var now = new Date();
+    this.updatedAt = now;
+    if (!this.createdAt) {
+        this.createdAt = now;
+    }
+    next();
+});
 
 module.exports = mongoose.model('Device', DeviceSchema);

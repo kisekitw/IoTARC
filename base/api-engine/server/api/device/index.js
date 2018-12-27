@@ -1,23 +1,16 @@
-const express = require('express');
-const controller = require('./device.controller');
-const config = require('../../config/environment');
-const auth = require('../../auth/auth.service');
+'use strict';
 
-const router = express.Router();
+var express = require('express');
+var controller = require('./device.controller');
+var config = require('../../config/environment');
+var auth = require('../../auth/auth.service');
 
-//TODO: Get all devices
+var router = express.Router();
+
 router.get('/', auth.isAuthenticated(), controller.index);
-
-//TODO: Delete a device
-router.delete('/:id', auth.isAuthenticated(), controller.destroy); 
-
-//TODO: Update a device
+router.delete('/:id', auth.isAuthenticated(), controller.destroy);
 router.put('/:id', auth.isAuthenticated(), controller.update);
-
-//TODO: Get one device
 router.get('/:id', auth.isAuthenticated(), controller.show);
-
-//TODO: Create a device
 router.post('/', auth.isAuthenticated(), controller.create);
 
 module.exports = router;

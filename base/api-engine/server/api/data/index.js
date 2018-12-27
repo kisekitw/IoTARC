@@ -6,7 +6,7 @@ var auth = require('../../auth/auth.service');
 
 var router = express.Router();
 
-router.get('/:macAddress/:limit', auth.isAuthenticated(), controller.index);
+router.get('/:macAddress/:limit', controller.index);
 router.post('/', auth.isAuthenticated(), controller.create);
 
 module.exports = router;

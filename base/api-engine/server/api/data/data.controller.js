@@ -30,7 +30,6 @@ exports.create = function(req, res, next) {
         if (err) return res.status(500).send(err);
         res.json(_data);
         if(data.topic === 'led'){
-            console.log('led publish===========>',data);
             require('../../mqtt/index.js').sendLEDData(data.data.l);// send led value
         }
     });
